@@ -1,7 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
 
 module.exports = {
   entry: ["./src/scripts.ts", "./src/styles.css"],
@@ -12,7 +11,6 @@ module.exports = {
     client: {
       logging: "none",
     },
-    hot: true, // Enable Hot Module Replacement
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -45,6 +43,14 @@ module.exports = {
       template: "src/index.html",
       favicon: "favicon.png",
       chunks: [],
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "src/assets",
+          to: "assets",
+        },
+      ],
     }),
   ],
   output: {
